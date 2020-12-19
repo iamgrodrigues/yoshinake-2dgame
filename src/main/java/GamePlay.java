@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 public class GamePlay extends JPanel implements KeyListener, ActionListener {
 
@@ -15,18 +16,28 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
     private boolean up = false;
     private boolean down = false;
 
+    private ImageIcon titleImage;
     private ImageIcon rightMouth;
     private ImageIcon leftMouth;
     private ImageIcon upMouth;
     private ImageIcon downMouth;
+    private ImageIcon yoshinakeImage;
+    private ImageIcon enemy;
 
     private int yoshinakeLength = 3;
 
     private Timer timer;
     private int delay = 100;
-    private ImageIcon yoshinakeImage;
 
-    private ImageIcon titleImage;
+    private int [] enemyXPos = {25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375,
+            400, 425, 450, 475, 500, 525, 550, 575, 600, 625, 650, 675, 700, 725, 750, 775, 800, 825, 850};
+    private int [] enemyYPos = {75, 100, 125, 150, 175, 200, 225, 250, 275, 300, 325, 350, 375,
+            400, 425, 450, 475, 500, 525, 550, 575, 600, 625};
+
+    private Random random = new Random();
+
+    private int xPos = random.nextInt(34);
+    private int yPos = random.nextInt(23);
 
     private int moves = 0;
 
@@ -91,6 +102,17 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
                 yoshinakeImage.paintIcon(this, g, yoshinakeXLength[i], yoshinakeYLength[i]);
             }
         }
+
+        enemy = new ImageIcon("assets/enemy.png");
+
+        if ((enemyXPos[xPos] == yoshinakeXLength[0] && enemyYPos[yPos] == yoshinakeYLength[0])) {
+
+            yoshinakeLength++;
+            xPos = random.nextInt(34);
+            yPos = random.nextInt(23);
+        }
+
+        enemy.paintIcon(this, g, enemyXPos[xPos], enemyYPos[yPos]);
 
         g.dispose();
 
