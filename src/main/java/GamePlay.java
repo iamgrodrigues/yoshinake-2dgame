@@ -24,6 +24,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
     private ImageIcon yoshinakeImage;
     private ImageIcon enemy;
 
+    private int score = 0;
     private int yoshinakeLength = 3;
 
     private Timer timer;
@@ -48,7 +49,6 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
         setFocusTraversalKeysEnabled(false);
         timer = new Timer(delay, this);
         timer.start();
-
     }
 
     public void paint (Graphics g) {
@@ -80,6 +80,16 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
         g.setColor(Color.black);
         g.fillRect(25, 75, 850, 575);
 
+        // score game
+        g.setColor(Color.white);
+        g.setFont(new Font("arial", Font.PLAIN, 14));
+        g.drawString("Scores: " + score, 780, 30);
+
+        // yoshinake length
+        g.setColor(Color.white);
+        g.setFont(new Font("arial", Font.PLAIN, 14));
+        g.drawString("Length: " + yoshinakeLength, 780, 50);
+
         rightMouth = new ImageIcon("assets/rightmouth.png");
         rightMouth.paintIcon(this, g, yoshinakeXLength[0], yoshinakeYLength[0]);
 
@@ -107,6 +117,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
 
         if ((enemyXPos[xPos] == yoshinakeXLength[0] && enemyYPos[yPos] == yoshinakeYLength[0])) {
 
+            score++;
             yoshinakeLength++;
             xPos = random.nextInt(34);
             yPos = random.nextInt(23);
@@ -114,8 +125,25 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
 
         enemy.paintIcon(this, g, enemyXPos[xPos], enemyYPos[yPos]);
 
-        g.dispose();
+        for (int k = 1; k < yoshinakeLength; k++) {
 
+            if (yoshinakeXLength[k] == yoshinakeXLength[0] && yoshinakeYLength[k] == yoshinakeYLength[0]) {
+
+                right = false;
+                left = false;
+                up = false;
+                down = false;
+
+                g.setColor(Color.white);
+                g.setFont(new Font("arial", Font.BOLD, 50));
+                g.drawString("Game Over", 300, 300);
+
+                g.setFont(new Font("arial", Font.BOLD, 20));
+                g.drawString("Press Space ro RESTART", 350, 340);
+            }
+        }
+
+        g.dispose();
     }
 
     @Override
@@ -217,13 +245,10 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
 
                     yoshinakeYLength[j] = 75;
                 }
-
-
             }
         }
 
         repaint();
-
     }
 
     @Override
@@ -233,6 +258,14 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+
+            moves = 0;
+            score = 0;
+            yoshinakeLength = 3;
+            repaint();
+        }
 
         if (e.getExtendedKeyCode() == KeyEvent.VK_RIGHT) {
 
@@ -301,9 +334,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
             }
             right = false;
             left = false;
-
         }
-
     }
 
     @Override
