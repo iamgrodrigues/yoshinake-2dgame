@@ -69,7 +69,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
         g.drawRect(24, 10, 851, 55);
 
         // title image
-        titleImage = new ImageIcon("assets/yoshisnaketitle.jpg");
+        titleImage = new ImageIcon(getClass().getResource("/assets/yoshisnaketitle.jpg"));
         titleImage.paintIcon(this, g, 25, 11);
 
         //gameplay border
@@ -90,30 +90,30 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
         g.setFont(new Font("arial", Font.PLAIN, 14));
         g.drawString("Length: " + yoshinakeLength, 780, 50);
 
-        rightMouth = new ImageIcon("assets/rightmouth.png");
+        rightMouth = new ImageIcon(getClass().getResource("/assets/rightmouth.png"));
         rightMouth.paintIcon(this, g, yoshinakeXLength[0], yoshinakeYLength[0]);
 
         for (int i=0; i < yoshinakeLength; i++) {
 
             if (i ==0 && right) {
-                rightMouth = new ImageIcon("assets/rightmouth.png");
+                rightMouth = new ImageIcon(getClass().getResource("/assets/rightmouth.png"));
                 rightMouth.paintIcon(this, g, yoshinakeXLength[i], yoshinakeYLength[i]);
             }if (i ==0 && left) {
-                leftMouth = new ImageIcon("assets/leftmouth.png");
+                leftMouth = new ImageIcon(getClass().getResource("/assets/leftmouth.png"));
                 leftMouth.paintIcon(this, g, yoshinakeXLength[i], yoshinakeYLength[i]);
             }if (i ==0 && up) {
-                upMouth = new ImageIcon("assets/upmouth.png");
+                upMouth = new ImageIcon(getClass().getResource("/assets/upmouth.png"));
                 upMouth.paintIcon(this, g, yoshinakeXLength[i], yoshinakeYLength[i]);
             }if (i ==0 && down) {
-                downMouth = new ImageIcon("assets/downmouth.png");
+                downMouth = new ImageIcon(getClass().getResource("/assets/downmouth.png"));
                 downMouth.paintIcon(this, g, yoshinakeXLength[i], yoshinakeYLength[i]);
             }if (i !=0) {
-                yoshinakeImage = new ImageIcon("assets/yoshinakeimage.png");
+                yoshinakeImage = new ImageIcon(getClass().getResource("/assets/yoshinakeimage.png"));
                 yoshinakeImage.paintIcon(this, g, yoshinakeXLength[i], yoshinakeYLength[i]);
             }
         }
 
-        enemy = new ImageIcon("assets/enemy.png");
+        enemy = new ImageIcon(getClass().getResource("/assets/enemy.png"));
 
         if ((enemyXPos[xPos] == yoshinakeXLength[0] && enemyYPos[yPos] == yoshinakeYLength[0])) {
 
