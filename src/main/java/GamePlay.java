@@ -139,7 +139,7 @@ public class GamePlay extends JPanel implements KeyListener, ActionListener {
                 g.drawString("Game Over", 300, 300);
 
                 g.setFont(new Font("arial", Font.BOLD, 20));
-                g.drawString("Press Space ro RESTART", 350, 340);
+                g.drawString("Press Space ro RESTART", 320, 340);
             }
         }
 
